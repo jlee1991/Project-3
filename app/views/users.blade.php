@@ -32,7 +32,7 @@
          <p>{{ $address }}</p>
         @endforeach
       <?php } ?>
-    <?php else{}; ?>
+      <?php else{}; ?>
 
       //Text
       <?php if($_GET['text']=='Yes'){ ?>
@@ -40,7 +40,7 @@
          <p>{{ $text }}</p>
         @endforeach
       <?php } ?>
-    <?php else{}; ?>
     <?php } ?>
+    <?php else{}; ?>
 
 @stop
