@@ -9,13 +9,15 @@
 @stop
 
 @section('content')
-  {{ Form::open('method' => 'GET') }}
-    {{ Form::text('input') }}
-    {{ Form::submit('Generate!') }}
+<form action='index.php' method='GET'>
+  Generate Users (Max 99): <input type="text" value="" name="subject" maxlength="2"><br>
+  <input type="submit" value="Submit">
+</form>
+
+$iteration=$_GET['subject'];
 
     @foreach($paragraphs as $item)
      <p>{{ $item }}</p>
     @endforeach
 
-  {{ Form::close() }}
 @stop

@@ -20,13 +20,12 @@ Route::get('/', function()
 Route::get('/loremipsum', function()
 {
 
-	$input=5;
+	$input=$_GET['paragraphs'];
 
 	$generator = new Badcow\LoremIpsum\Generator();
 	$paragraphs = $generator->getParagraphs($input);
 
-	return View::make('loremipsum') -> with('paragraphs',$paragraphs);
-	//->with('input',$input)
+	return View::make('loremipsum') -> with('paragraphs',$paragraphs) ->with('input',$input);
 });
 
 //Route to Users
@@ -35,7 +34,7 @@ Route::get('/users', function()
 
 	// use the factory to create a Faker\Generator instance
 	$faker = Faker\Factory::create();
-	$input=5;
+	$input=99;
 
 	for($i=1;$i<$input;$i++) {
 		$person[$i]["name"] = $faker->name;
@@ -43,5 +42,6 @@ Route::get('/users', function()
 		$person[$i]["text"] = $faker->text;
 	}
 
-	return View::make('users') -> with('person',$person) -> with('input',$input);
+	return View::make('users') -> with('person',$person);
+	//-> with('input',$input) ;
 });
