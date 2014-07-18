@@ -9,6 +9,7 @@
 @stop
 
 @section('content')
+<a href='/'>Return Home</a>
 
   <form action='users' method='GET'>
     Generate Users (Max 99): <input type="text" value="" name="subject" maxlength="2"><br>
