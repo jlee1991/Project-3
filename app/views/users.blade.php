@@ -10,37 +10,31 @@
 
 @section('content')
 
-  <form action='index.php' method='GET'>
+  <form action='users' method='GET'>
     Generate Users (Max 99): <input type="text" value="" name="subject" maxlength="2"><br>
     <input type="checkbox" value="Yes" name="address">Generate Address<br>
     <input type="checkbox" value="Yes" name="text">Generate Text<br>
     <input type="submit" value="Submit">
-  </form>
+  </form><br>
 
-  $iteration=$_GET['subject'];
+@if(isset($person))
+  @for($i=0; $i < $numusers; $i++)
 
-    <?php for($i=1;$i<$iteration;$i++) {?>
+    <b><p>{{$person[$i]["name"]}}</p></b>
 
-      //Person
-        @foreach($person[$i]["name"] as $name)
-         <p>{{ $name }}</p>
-        @endforeach
+    @if(isset($_GET['address']))
+      @if($_GET['address']=='Yes')
+      <p>{{$person[$i]["address"]}}</p>
+      @endif
+    @endif
 
-      //Address
-      <?php if($_GET['address']=='Yes'){ ?>
-        @foreach($person[$i]["address"] as $address)
-         <p>{{ $address }}</p>
-        @endforeach
-      <?php } ?>
-      <?php else{}; ?>
+    @if(isset($_GET['text']))
+      @if($_GET['text']=='Yes')
+      <p>{{$person[$i]["text"]}}</p>
+      @endif
+    @endif
 
-      //Text
-      <?php if($_GET['text']=='Yes'){ ?>
-        @foreach($person[$i]["text"] as $text)
-         <p>{{ $text }}</p>
-        @endforeach
-      <?php } ?>
-    <?php } ?>
-    <?php else{}; ?>
+  @endfor
+@endif
 
 @stop

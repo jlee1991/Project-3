@@ -20,28 +20,39 @@ Route::get('/', function()
 Route::get('/loremipsum', function()
 {
 
-	$input=$_GET['paragraphs'];
+	if(isset($_GET['pages'])){
+		$input=$_GET['pages'];
 
-	$generator = new Badcow\LoremIpsum\Generator();
-	$paragraphs = $generator->getParagraphs($input);
+		$generator = new Badcow\LoremIpsum\Generator();
+		$paragraphs = $generator->getParagraphs($input);
 
-	return View::make('loremipsum') -> with('paragraphs',$paragraphs) ->with('input',$input);
+		return View::make('loremipsum') -> with('paragraphs',$paragraphs);
+	}
+
+	else{
+		return View::make('loremipsum');
+	}
 });
 
 //Route to Users
 Route::get('/users', function()
 {
 
-	// use the factory to create a Faker\Generator instance
-	$faker = Faker\Factory::create();
-	$input=99;
+	if(isset($_GET['subject'])){
+		// use the factory to create a Faker\Generator instance
+		$faker = Faker\Factory::create();
+		$numusers=$_GET['subject'];
 
-	for($i=1;$i<$input;$i++) {
-		$person[$i]["name"] = $faker->name;
-		$person[$i]["address"] = $faker->address;
-		$person[$i]["text"] = $faker->text;
+		for($i=0;$i<$numusers;$i++) {
+			$person[$i]["name"] = $faker->name;
+			$person[$i]["address"] = $faker->address;
+			$person[$i]["text"] = $faker->text;
+		}
+
+		return View::make('users') -> with('person',$person) -> with('numusers',$numusers);
 	}
 
-	return View::make('users') -> with('person',$person);
-	//-> with('input',$input) ;
+	else{
+		return View::make('users');
+	}
 });
